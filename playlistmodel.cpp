@@ -10,6 +10,7 @@
 PlaylistModel::PlaylistModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
+//    setAcceptDrops(true);
 }
 
 PlaylistModel::~PlaylistModel()
@@ -166,55 +167,60 @@ QMimeData *PlaylistModel::mimeData(const QModelIndexList &indexes) const
 
 bool PlaylistModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
-//    qDebug() << "Parent is: " << parent << endl;
-//    qDebug() << "New row: " << row << endl;
-//    if (action == Qt::IgnoreAction)
-//        return true;
-//         if (!data->hasFormat("video/mp4"))
-//             return false;
-
-////         if (column > 0)
+//    qDebug() << "Parent is: " << parent.row() << endl;
+////    qDebug() << "New row: " << row << endl;
+////    if (action == Qt::IgnoreAction)
+////        return true;
+////         if (!data->hasFormat("video/mp4"))
 ////             return false;
-              int beginRow;
 
-              if (row != -1)
-                  beginRow = row;
-              else if (parent.isValid())
-                       beginRow = parent.row();
-              else
-                       beginRow = rowCount(QModelIndex());
+//////         if (column > 0)
+//////             return false;
+//              int beginRow;
 
-              QByteArray encodedData = data->data("video/mp4");
-//              qDebug() << data-
-              QDataStream stream(&encodedData, QIODevice::ReadOnly);
-              QStringList newItems;
-              int   rows = 0;
+//              if (row != -1)
+//                  beginRow = row;
+//              else if (parent.isValid())
+//                       beginRow = parent.row();
+//              else
+//                       beginRow = rowCount(QModelIndex());
 
-              while (!stream.atEnd()) {
-                  QString text;
-                  stream >> text;
-                  newItems << text;
-                  ++rows;
-              }
-              // Rows у нас всегда 1 т.к можем выбрать одну сука за раз
-              // beginRow это новая позиция
-              qDebug() << "InsertRows (beginRow, rows): " << beginRow << rows << endl;
-//              insertRows(beginRow, rows, QModelIndex());
+//              QByteArray encodedData = data->data("video/mp4");
+////              qDebug() << data-
+//              QDataStream stream(&encodedData, QIODevice::ReadOnly);
+//              QStringList newItems;
+//              int   rows = 0;
+
+//              while (!stream.atEnd()) {
+//                  QString text;
+//                  stream >> text;
+//                  newItems << text;
+//                  ++rows;
+//              }
+//              // Rows у нас всегда 1 т.к можем выбрать одну сука за раз
+//              // beginRow это новая позиция
+//              qDebug() << "InsertRows (beginRow, rows): " << beginRow << rows << endl;
+////              insertRows(beginRow, rows, QModelIndex());
 
 
-              // В поле text хранится название нового видоса
-              foreach (QString text, newItems) {
-//                  beginInsertRows(parent.parent(), beginRow, beginRow);
-//                  endInsertRows();
-//                  changeItems(beginRow, beginRow);
-                  //insertRow(beginRow, text);
-//                  QModelIndex idx = index(beginRow, 0, QModelIndex());
-//                  qDebug() << idx.row();
-//                  bool flg = setData(idx, text);
-                  //qDebug() << flg;
-                  beginRow++;
-              }
+//              // В поле text хранится название нового видоса
+//              foreach (QString text, newItems) {
 
-              return true;
-//    //beginInsertItems(row, row);
+////                  beginMoveRows(QModelIndex(), beginRow, beginRow, QModelIndex(), beginRow);
+////                  endMoveRows();
+////                  beginInsertRows(QModelIndex(), beginRow, beginRow+rows-1);
+////                  endInsertRows();
+////                  beginInsertRows(parent.parent(), beginRow, beginRow);
+////                  endInsertRows();
+////                  changeItems(beginRow, beginRow);
+//                  //insertRow(beginRow, text);
+////                  QModelIndex idx = index(beginRow, 0, QModelIndex());
+////                  qDebug() << idx.row();
+////                  bool flg = setData(idx, text);
+//                  //qDebug() << flg;
+////                  beginRow++;
+//              }
+
+//              return true;
+////    //beginInsertItems(row, row);
 }

@@ -108,6 +108,7 @@ Player::Player(QWidget *parent)
 
     m_playlistModel = new PlaylistModel(this);
     m_playlistModel->setPlaylist(m_playlist);
+
 //! [2]
 
     m_playlistView = new QListView(this);

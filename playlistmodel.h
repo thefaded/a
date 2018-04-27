@@ -53,6 +53,7 @@
 
 #include <QAbstractItemModel>
 #include <QScopedPointer>
+#include <QDropEvent>
 
 QT_BEGIN_NAMESPACE
 class QMediaPlaylist;
@@ -91,6 +92,8 @@ public:
     QMimeData *mimeData(const QModelIndexList &indexes) const override;
     bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
     bool insertRow(int position, const QModelIndex &parent, int rowId);
+
+
 private slots:
     void beginInsertItems(int start, int end);
     void endInsertItems();
