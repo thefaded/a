@@ -166,7 +166,8 @@ QMimeData *PlaylistModel::mimeData(const QModelIndexList &indexes) const
 
 bool PlaylistModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
-    qDebug() << "New row: " << row << endl;
+//    qDebug() << "Parent is: " << parent << endl;
+//    qDebug() << "New row: " << row << endl;
 //    if (action == Qt::IgnoreAction)
 //        return true;
 //         if (!data->hasFormat("video/mp4"))
@@ -184,9 +185,10 @@ bool PlaylistModel::dropMimeData(const QMimeData *data, Qt::DropAction action, i
                        beginRow = rowCount(QModelIndex());
 
               QByteArray encodedData = data->data("video/mp4");
+//              qDebug() << data-
               QDataStream stream(&encodedData, QIODevice::ReadOnly);
               QStringList newItems;
-              int rows = 0;
+              int   rows = 0;
 
               while (!stream.atEnd()) {
                   QString text;
@@ -198,13 +200,18 @@ bool PlaylistModel::dropMimeData(const QMimeData *data, Qt::DropAction action, i
               // beginRow это новая позиция
               qDebug() << "InsertRows (beginRow, rows): " << beginRow << rows << endl;
 //              insertRows(beginRow, rows, QModelIndex());
-//              beginInsertItems(beginRow, beginRow + rows);
+
 
               // В поле text хранится название нового видоса
               foreach (QString text, newItems) {
-                  QModelIndex idx = index(beginRow, 0, QModelIndex());
-                  qDebug() << idx;
-                  setData(idx, text);
+//                  beginInsertRows(parent.parent(), beginRow, beginRow);
+//                  endInsertRows();
+//                  changeItems(beginRow, beginRow);
+                  //insertRow(beginRow, text);
+//                  QModelIndex idx = index(beginRow, 0, QModelIndex());
+//                  qDebug() << idx.row();
+//                  bool flg = setData(idx, text);
+                  //qDebug() << flg;
                   beginRow++;
               }
 
